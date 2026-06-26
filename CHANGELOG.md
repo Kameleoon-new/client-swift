@@ -1,6 +1,12 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 4.27.1 - 2026-06-26
+> [!WARNING]
+> If you are upgrading from a version prior to 4.18.0, note that variables with integer values should now be cast to `Int` instead of `Double`, as was done previously.
+### Bug fixes
+* Fixed an issue where, in certain scenarios, the SDK data file (configuration) was not updated at the configured [`refreshIntervalMinute`](https://docs.kameleoon.com/developer-docs/sdks/mobile-sdks/ios-sdk#additional-configuration) interval in [polling](https://docs.kameleoon.com/developer-docs/feature-experimentation/technical-reference/technical-considerations#polling-default) mode and was instead refreshed only after the application restarted.
+
 ## 4.27.0 - 2026-05-05
 > [!WARNING]
 > If you are upgrading from a version prior to 4.18.0, note that variables with integer values should now be cast to `Int` instead of `Double`, as was done previously.
