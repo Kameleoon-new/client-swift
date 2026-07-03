@@ -1,6 +1,14 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 4.27.2 - 2026-07-03
+> [!WARNING]
+> If you are upgrading from a version prior to 4.18.0, note that variables with integer values should now be cast to `Int` instead of `Double`, as was done previously.
+### Bug fixes
+* Tracking requests are now paused while the application is in the background. This reduces the number of requests sent to Kameleoon servers and prevents inflated visit counts when the app is briefly awakened in the background (for example, by a silent push notification, background fetch/refresh, or a location update). To continue sending data while the app is in the background, explicitly call [`flush(instant: true)`][flush] from your background handler.
+
+[flush]: https://developers.kameleoon.com/feature-management-and-experimentation/mobile-sdks/ios-sdk/#flush
+
 ## 4.27.1 - 2026-06-26
 > [!WARNING]
 > If you are upgrading from a version prior to 4.18.0, note that variables with integer values should now be cast to `Int` instead of `Double`, as was done previously.
