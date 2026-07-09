@@ -1,6 +1,12 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 4.27.3 - 2026-07-09
+> [!WARNING]
+> If you are upgrading from a version prior to 4.18.0, note that variables with integer values should now be cast to `Int` instead of `Double`, as was done previously.
+### Bug fixes
+* Increased the default and minimum values of the [`activityTrackingIntervalMillisecond` (`activity_tracking_interval_millisecond`)](https://developers.kameleoon.com/feature-management-and-experimentation/mobile-sdks/ios-sdk/#additional-configuration) parameter from `15 000` ms to `60 000` ms. This reduces the number of activity requests sent to the Data API and helps prevent `429` (Too Many Requests) responses.
+
 ## 4.27.2 - 2026-07-03
 > [!WARNING]
 > If you are upgrading from a version prior to 4.18.0, note that variables with integer values should now be cast to `Int` instead of `Double`, as was done previously.
