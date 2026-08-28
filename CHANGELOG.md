@@ -1,6 +1,23 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 4.28.0 - 2026-08-28
+> [!CAUTION]
+> This is the final notice regarding the casting of integer variable values `Int` to `Double`. According to our [EOL policy](https://www.kameleoon.com/eol-policy), versions earlier than **4.18.0** have been end-of-life for over one year.
+> [!WARNING]
+> If you are upgrading from a version prior to 4.18.0, note that variables with integer values should now be cast to `Int` instead of `Double`, as was done previously.
+### Features
+* Added support for SDK event handlers through the new [`setEventHandler`][setEventHandler] API:
+  - `.dataFileUpdate` notifies when the SDK data file (configuration) is updated with [polling](https://docs.kameleoon.com/developer-docs/feature-experimentation/technical-reference/technical-considerations#polling-default) or [streaming](https://docs.kameleoon.com/developer-docs/feature-experimentation/technical-reference/technical-considerations#streaming-premium-option) modes.
+  - `.httpRequest` notifies when SDK HTTP requests complete successfully or fail. The handler is called once per each actual HTTP request attempt, including retries.
+  - HTTP request events include the request type, HTTP status or failure details, and request duration.
+  - Passing `nil` to `setEventHandler` clears the handler for the selected event type.
+* The [`updateConfigurationHandler`](https://developers.kameleoon.com/feature-management-and-experimentation/mobile-sdks/ios-sdk#updateconfigurationhandler) method has been deprecated in favor of [`setEventHandler`][setEventHandler] with the `.dataFileUpdate` event type.
+### Bug fixes
+* Targeting conditions of an unknown type (for example, web-specific conditions that are not supported by the mobile SDK) are now evaluated as `false` instead of `true`. Previously, visitors could be targeted by segments containing unsupported conditions.
+
+[setEventHandler]: https://developers.kameleoon.com/feature-management-and-experimentation/mobile-sdks/ios-sdk#seteventhandler
+
 ## 4.27.3 - 2026-07-09
 > [!WARNING]
 > If you are upgrading from a version prior to 4.18.0, note that variables with integer values should now be cast to `Int` instead of `Double`, as was done previously.
