@@ -4,8 +4,6 @@ All notable changes to this project will be documented in this file.
 ## 4.28.0 - 2026-08-28
 > [!CAUTION]
 > This is the final notice regarding the casting of integer variable values `Int` to `Double`. According to our [EOL policy](https://www.kameleoon.com/eol-policy), versions earlier than **4.18.0** have been end-of-life for over one year.
-> [!WARNING]
-> If you are upgrading from a version prior to 4.18.0, note that variables with integer values should now be cast to `Int` instead of `Double`, as was done previously.
 ### Features
 * Added support for SDK event handlers through the new [`setEventHandler`][setEventHandler] API:
   - `.dataFileUpdate` notifies when the SDK data file (configuration) is updated with [polling](https://docs.kameleoon.com/developer-docs/feature-experimentation/technical-reference/technical-considerations#polling-default) or [streaming](https://docs.kameleoon.com/developer-docs/feature-experimentation/technical-reference/technical-considerations#streaming-premium-option) modes.
