@@ -1,6 +1,19 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 4.29.0 - 2026-11-19
+### Features
+* Real-time configuration [streaming](https://docs.kameleoon.com/developer-docs/feature-experimentation/technical-reference/technical-considerations#streaming-premium-option) is now controlled by the new `configUpdateMode` field of the configuration instead of `realTimeUpdate`. The SDK uses streaming only when the field is `STREAMING`. `STREAMING_SERVER_ONLY` enables streaming for server-side SDKs only, so the iOS SDK keeps [polling](https://docs.kameleoon.com/developer-docs/feature-experimentation/technical-reference/technical-considerations#polling-default) in that mode.
+### Bug fixes
+* Fixed the SDK getting stuck without configuration updates when the real-time streaming connection could not be established, or kept being established without delivering an event (for example, when the streaming server answers with an error or with an empty response, or behind a proxy which accepts the connection but forwards nothing). The SDK now retries the connection once after 10 seconds and then falls back to polling, with the first poll after one minute; each successful poll switches back to streaming once it is available again.
+* Fixed configuration updates published while the real-time streaming connection was down (reconnection, server-side close) being missed until the next update. The SDK now resynchronizes the configuration on every (re)connection.
+* Fixed the SDK getting stuck without configuration updates on a stalled streaming connection (e.g. one silently dropped by a NAT or load balancer). The SDK now treats 6 minutes of silence as a connection failure: it reconnects, and falls back to polling if the new connection stalls as well.
+* Fixed an older configuration being applied over a newer one when two configuration fetches (for example, a poll and a fetch triggered by a streaming event) completed out of order. The SDK now ignores a fetched configuration whose `dateModified` is older than the current one's.
+* Made the handling of the real-time streaming connection reliable when the application goes to the background and returns. In streaming mode the SDK now closes the connection and stops all configuration requests while the application is in the background, including the pending reconnections and retries, which previously could keep running or open a duplicated connection. When the application becomes active again, the SDK fetches the configuration and then restores streaming. The configuration is no longer fetched when the application becomes active without having been in the background (for example, after a system alert is dismissed).
+* Fixed the SDK not reacting to the network becoming available again after the monitoring of the network status had been stopped once (for example, after streaming had been disabled and enabled again in the configuration).
+* `KameleoonClientFactory.forget` now stops the configuration polling or streaming of the forgotten client. Previously they kept running until the application was terminated.
+* Fixed `KameleoonClientFactory.forget` ignoring its `visitorCode` parameter: the client of the current visitor was always the one forgotten. The current visitor is now used only when `visitorCode` is omitted.
+
 ## 4.28.0 - 2026-08-28
 > [!CAUTION]
 > This is the final notice regarding the casting of integer variable values `Int` to `Double`. According to our [EOL policy](https://www.kameleoon.com/eol-policy), versions earlier than **4.18.0** have been end-of-life for over one year.
