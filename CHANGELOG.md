@@ -12,6 +12,8 @@ All notable changes to this project will be documented in this file.
   - Elapsed time since first visit
   - Elapsed time since last visit
 
+  These operators will be available in the Kameleoon app with the platform release planned for December 2026.
+
 ## 4.29.0 - 2026-11-19
 ### Features
 * Real-time configuration [streaming](https://docs.kameleoon.com/developer-docs/feature-experimentation/technical-reference/technical-considerations#streaming-premium-option) is now controlled by the new `configUpdateMode` field of the configuration instead of `realTimeUpdate`. The SDK uses streaming only when the field is `STREAMING`. `STREAMING_SERVER_ONLY` enables streaming for server-side SDKs only, so the iOS SDK keeps [polling](https://docs.kameleoon.com/developer-docs/feature-experimentation/technical-reference/technical-considerations#polling-default) in that mode.
