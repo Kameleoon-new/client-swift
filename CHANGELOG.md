@@ -1,6 +1,17 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 4.30.0 - 2026-11-23
+### Features
+* Added the "greater than or equal to" (`>=`) and "less than or equal to" (`<=`) operators to the following targeting conditions:
+  - App version
+  - SDK type
+  - Custom data (number)
+  - Total number of visits
+  - Number of visits today
+  - Elapsed time since first visit
+  - Elapsed time since last visit
+
 ## 4.29.0 - 2026-11-19
 ### Features
 * Real-time configuration [streaming](https://docs.kameleoon.com/developer-docs/feature-experimentation/technical-reference/technical-considerations#streaming-premium-option) is now controlled by the new `configUpdateMode` field of the configuration instead of `realTimeUpdate`. The SDK uses streaming only when the field is `STREAMING`. `STREAMING_SERVER_ONLY` enables streaming for server-side SDKs only, so the iOS SDK keeps [polling](https://docs.kameleoon.com/developer-docs/feature-experimentation/technical-reference/technical-considerations#polling-default) in that mode.
